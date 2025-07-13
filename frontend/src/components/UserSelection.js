@@ -1,7 +1,8 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 const UserSelection = ({ 
-  users, 
+  users = [], 
   selectedUserId, 
   onSelectUser, 
   onClaimPoints,
@@ -17,7 +18,7 @@ const UserSelection = ({
           className="flex-grow px-4 py-2 border border-gray-300 rounded-lg shadow-sm focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500 transition-all"
         >
           <option value="">Select a user</option>
-          {users.map(user => (
+          {Array.isArray(users) && users.map(user => (
             <option key={user._id} value={user._id}>
               {user.name} (Current: {user.totalPoints} pts)
             </option>
@@ -50,6 +51,20 @@ const UserSelection = ({
       </div>
     </div>
   );
+};
+
+
+UserSelection.propTypes = {
+  users: PropTypes.array,
+  selectedUserId: PropTypes.string,
+  onSelectUser: PropTypes.func.isRequired,
+  onClaimPoints: PropTypes.func.isRequired,
+  onShowAddUser: PropTypes.func.isRequired,
+  onShowHistory: PropTypes.func.isRequired
+};
+
+UserSelection.defaultProps = {
+  users: []
 };
 
 export default UserSelection;
