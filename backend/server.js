@@ -12,6 +12,7 @@ app.use(cors());
 app.use(express.json());
 
 // Routes
+app.get('/', (req, res) => res.send('server is live'));
 app.use('/api/users', userRoutes);
 app.use('/api/history', historyRoutes);
 
