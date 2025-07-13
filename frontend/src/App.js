@@ -22,7 +22,7 @@ function App() {
 
   const fetchUsers = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/users');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/users`);
       setUsers(response.data);
     } catch (error) {
       console.error('Error fetching users:', error);
@@ -34,7 +34,7 @@ function App() {
     
     try {
       const response = await axios.post(
-        `http://localhost:5000/api/users/${selectedUserId}/claim`
+        `${process.env.REACT_APP_API_URL}/api/users/${selectedUserId}/claim`
       );
       fetchUsers();
       toast.success(`Awarded ${response.data.points} points to ${response.data.user.name}`);
@@ -45,7 +45,7 @@ function App() {
 
   const handleAddUser = async (name) => {
     try {
-      await axios.post('http://localhost:5000/api/users', { name });
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/users`, { name });
       setShowAddUser(false);
       fetchUsers();
     } catch (error) {
@@ -55,7 +55,7 @@ function App() {
 
   const fetchHistory = async () => {
     try {
-      const response = await axios.get('http://localhost:5000/api/history');
+      const response = await axios.get(`${process.env.REACT_APP_API_URL}/api/history`);
       setHistory(response.data);
       setShowHistory(true);
     } catch (error) {
